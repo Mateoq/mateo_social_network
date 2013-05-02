@@ -1,0 +1,126 @@
+body{
+	margin: 0px;
+	font-family: Segoe Script, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+
+#pageTop{
+	width: 100%;
+	background: url(mineHeader.png) repeat-x;
+	height: 60px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+}
+
+#pageTop > #pageTopWrap{
+	width: 1200px;
+	margin: 0px auto;
+	height: 60px;
+}
+
+/*#pageTop > #pageTopRight{
+	width: 150px;
+	height: 60px;
+	border: 1px dashed #F03;
+	margin-left: 1200px;
+	margin-right: auto:
+	margin-top: -62px;
+}*/
+
+/*
+#pageTop > #pageTopWrap > #pageTopLogo{
+	height: 153px;
+	width: 189px;
+	margin-top: -11.2px;
+	float: left;
+}
+*/
+
+#pageTop > #pageTopLogo{
+	height: 153px;
+	width: 189px;
+	margin: 0px 20px;
+	margin-top: -11.2px;
+	float: left;
+}
+
+/*
+#pageTop > #pageTopWrap > #pageTopRest{
+	width: 890px;
+	height: 60px;
+
+}
+
+#pageTop > #pageTopWrap > #pageTopRest > div{
+	height: 28px;
+	background: #CCC;
+	border: 1px solid  #F00;
+}*/
+
+.mainMenu{
+	height: 60px;
+	padding: 4px;
+}
+
+.mainMenu > div{
+	margin-top: 8px;
+	padding: 4px;
+}
+
+.mainMenu > div > a{
+	display: block;
+	float: left;
+	color: #00B2B2;
+	text-decoration: none;
+	margin: 0px 16px;
+	font-size: 18px;
+}
+
+.mainMenu > div > a:hover{
+	background: #007297;
+}
+
+.signMenu{
+	height: 28px;
+	width: 165px;
+	margin-top: -50px;
+	float: right;
+}
+
+.signMenu > a{
+	margin: 0px 18px;
+	display: block;
+	color: #00B2B2;
+	text-decoration: none;
+}
+
+.signMenu > a:hover{
+	background: #007297;
+}
+
+/* PAGE MIDDLE */
+#pageMiddle{
+	height: 1000px;
+	background-color: #CCC;
+	width: 1000px;
+	margin: 0px auto;
+	margin-top: 60px;
+	margin-bottom: -60px;
+	font-size: 18px;
+	padding: 15px;
+	border: 0px;
+}
+
+/* PAGE BOTTOM */
+#pageBottom{
+	background: #00698C;
+	padding: 24px;
+	font-size: 12px;
+	color: #00B2B2;
+	text-align: center;
+	width: 100%;
+	bottom: 0px;
+	left: 0px;
+	position: fixed;
+}

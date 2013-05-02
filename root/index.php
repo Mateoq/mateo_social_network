@@ -1,5 +1,5 @@
 <?php
-    
+
 ?>
 
 <!DOCTYPE  HTML>
@@ -7,7 +7,8 @@
 	<head>
 		<meta charset="UTF-8"  />
 		<title>Mateo Social Network</title>
-		<link rel="stylesheet" href="style/index.css" />
+		<link rel="stylesheet" href="css/index.css" />
+		<script type="text/javascript" src="js/main.js"></script>
 	</head>
 	<body>
 		<?php include_once 'template_pageTop.php'; ?>
