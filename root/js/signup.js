@@ -1,9 +1,9 @@
 function restrict(elem) {
   var tf = _(elem);
-  var rx = new RegExp;
-  if (elem == "email") {
+  var rx = new RegExp();
+  if (elem === "email") {
     rx = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/gi;
-  } else if(elem == "username") {
+  } else if (elem === "username") {
     rx = /[^a-z0-9]/gi;
   }
 
@@ -16,15 +16,14 @@ function emptyElement(x) {
 
 function checkusername() {
   var u = _("username").value;
-  if (u != "") {
+  if (u !== "") {
     _("unamestatus").innerHTML = 'checking ...';
     var ajax = ajaxObj("POST", "signup.php");
-    ajax.onreadystatechange = function() {
-      if (ajaxReturn(ajax) == true) {
+    ajax.onreadystatechange = function () {
+      if (ajaxReturn(ajax) === true) {
         _("unamestatus").innerHTML = ajax.responseText;
       }
-    }
-
+    };
     ajax.send("usernamecheck=" + u);
   }
 }
@@ -36,30 +35,28 @@ function signup() {
   var p2 = _("pass2").value;
   var c = _("country").value;
   var g = _("gender").value;
-  var status = _("status").value;
+  var status = _("status");
 
   var message = signupValidations(u, e, p1, p2, c, g);
 
-  if (message != "") {
+  if (message !== "") {
     status.innerHTML = message;
-  } else if(_("terms").style.display == "none") {
+  } else if (_("terms").style.display === "none") {
     status.innerHTML = "Please view the terms of use";
-  }else {
+  } else {
     _("signupbtn").style.display = "none";
     status.innerHTML = "please wait ...";
     var ajax = ajaxObj("POST", "signup.php");
-    ajax.onreadystatechange = function() {
-      if (ajax.responseText != "signup_success") {
+    ajax.onreadystatechange = function () {
+      if (ajax.responseText !== "signup_success") {
         status.innerHTML = ajax.responseText;
         _("signupbtn").style.display = "block";
       } else {
         window.scrollTo(0, 0);
         _("signupform").innerHTML = "OK " + u + "check your email inbox and junk mail box at <u>"
-                                  + e + "</u> in a moment to complete the sign up process by activating your account.
-                                   You will not be able to do anything on the site until you successfully
-                                   activate your account."
+                                  + e + "</u> in a moment to complete the sign up process by activating your account.\nYou will not be able to do anything on the site until you successfully\nactivate your account.";
       }
-    }
+    };
     ajax.send("u=" + u + "&e=" + e + "&p=" + p1 + "&c=" + c + "&g=" + g);
   }
 

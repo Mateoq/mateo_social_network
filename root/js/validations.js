@@ -1,27 +1,27 @@
 function signupValidations(u, e, p1, p2, c, g) {
   var message = "";
 
-  if (g == "") {
+  if (g === "") {
     message = "You must choose a gender";
   }
 
-  if (c == "") {
+  if (c === "") {
     message = "You must choose a country";
   }
 
-  if (p2 != p1) {
+  if (p2 !== p1) {
     message = "Confirmation does not match the password";
   }
 
-  if (p1 = "") {
+  if (p1 === "") {
     message = "You must fill the password field";
   }
 
-  if (e == "") {
+  if (e === "") {
     message = "You must fill the email field";
   }
 
-  if (u == "") {
+  if (u === "") {
     message = "You must fill the user name text field";
   }
 

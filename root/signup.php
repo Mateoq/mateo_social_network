@@ -61,30 +61,33 @@ if (isset($_POST['usernamecheck'])) {
 		if ($u == "" || $e == "" || $p == "" || $g == "" || $c == "") {
 			echo "The username you entered is already taken";
 			exit();
-		} elseif ($u_check > 0) {
+		} else if ($u_check > 0) {
 			echo "The username you entered is already taken";
 			exit();
 		} elseif ($e_check > 0) {
 			echo "That email address is already in use in the system";
 			exit();
-		} elseif (strlen($u) < 3 || strlen($u) > 16) {
+		} else if (strlen($u) < 3 || strlen($u) > 16) {
 			echo "Username must be between 3 and 16 characters";
 			exit();
-		} elseif (is_numeric($u[0])) {
+		} else if (is_numeric($u[0])) {
 			echo "Username cannot begin with a number";
 			exit();
-		} else{
+		} else {
 		// END FORM DATA ERROR HANDLING
 			// Begin Insertion of data into the database
 			// Hash the password and apply your own mysterious unique salt
-			$cryptpass = crypt($p);
-			include_once ("php_includes/randStrGen.php");
-			$p_hash = randStrGen(20) . "$cryptpass" . randStrGen(20);
+
+			/*$cryptpass = crypt($p);
+			include_once ("php_includes/randStrGenerator.php");
+			$p_hash = randStrGen(20) . "$cryptpass" . randStrGen(20);*/
+
+			$p_hash = md5($p);
 			// Add user info into the database table for the main site table
 			$sql = "INSERT INTO users (username, email, password, gender, country, ip, signup, lastlogin, notescheck)
-						 VALUES('$u', '$e', '$p_hash', '$g', '$c', now(), now(), now())";
+						 VALUES('$u', '$e', '$p_hash', '$g', '$c', '$ip', now(), now(), now())";
 			$query = mysqli_query($db_conx, $sql);
-			$uid = mysql_insert_id($db_conx);
+			$uid = mysqli_insert_id($db_conx);
 			// Establish their row in the useroptions table
 			$sql = "INSERT INTO useroptions (id, username, background) VALUES ('$uid', '$u', 'original')";
 			$query = mysqli_query($db_conx, $sql);
@@ -94,7 +97,7 @@ if (isset($_POST['usernamecheck'])) {
 			 }
 			// Email the user their activation link
 			$to = "$e";
-			$from = "quinterom1592@gmail.com";
+			$from = "donot_reply@rakingsas.com";
 			$subject = "Mateo Social Network Account Activation";
 			$message = '<!DOCTYPE html>
 									<html>
@@ -104,7 +107,7 @@ if (isset($_POST['usernamecheck'])) {
 										</head>
 										<body style="font-family:Tahoma, Geneva, sans-serif;">
 											<div style="padding:10px; background: #333; font-size:24px; color: #CCC;">
-												<a href="http://localhost:78/Matep_Social_Network/root/">
+												<a href="http://www.rakingsas.com/mtsocial">
 													<img src="http://localhost:78/Matep_Social_Network/root/img/logo.png" alt="Mateo Social Network" style="border:none; float:left;">
 												</a>
 												Mateo Social Network Account Activation
@@ -112,7 +115,7 @@ if (isset($_POST['usernamecheck'])) {
 											<div style="padding:24px; font-size:17px;">
 												Hello ' . $u . ',<br /><br />
 												Click the link below to activate your account when ready:<br /><br />
-												<a href="http://localhost:78/Matep_Social_Network/root/activation.php?id=' . $uid . '&u=' . $u . '&e=' . $e . '&p=' . $p_hash . '">
+												<a href="http://www.rakingsas.com/mtsocial/activation.php?id=' . $uid . '&u=' . $u . '&e=' . $e . '&p=' . $p_hash . '">
 													Click here to activate your account now
 												</a><br /><br />
 												Login after successful activation using your:<br />
@@ -125,7 +128,7 @@ if (isset($_POST['usernamecheck'])) {
 			$headers .= "Content-type: text/html; charset: iso-8859-1\n";
 
 			if (mail($to, $subject, $message, $headers)) {
-				echo "signup_success";
+				echo "Ok " . $u . ", check your email inbox and junk mail box at " . $e . " to activate your account.";
 			} else {
 				echo "Sorry, there was an issue :(";
 			}
@@ -156,11 +159,11 @@ if (isset($_POST['usernamecheck'])) {
 			<form name="signupform" id="signupform" onsubmit="return false;">
 				<div>Username: </div>
 				<input type="text" id="username" onblur="checkusername()" onkeyup="restrict('username')" maxlength="16">
+				<span id="unamestatus"></span>
 				<div>Email: </div>
 				<input id="email" type="text" onfocus="emptyElement('status')" onkeyup="restrict('email')" maxlength="88">
-				<span id="unamestatus"></span>
 				<div>Password: </div>
-				<input id="pass1" type="password" onfocus="emptyElement('status')" maxlength="16">
+				<input id="pass1" type="password" onfocus="emptyElement('status')" maxlength="100">
 				<div>Confirmation: </div>
 				<input type="password" id="pass2" onfocus="emptyElement('status')" maxlength="16">
 				<div>Gender: </div>
